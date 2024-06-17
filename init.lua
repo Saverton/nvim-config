@@ -156,6 +156,8 @@ vim.opt.scrolloff = 10
 vim.opt.relativenumber = true
 
 vim.opt.autowrite = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -607,6 +609,18 @@ require("lazy").setup({
 					end,
 				},
 			})
+
+			require("lspconfig")["yamlls"].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				settings = {
+					yaml = {
+						schemas = {
+							["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "/*",
+						},
+					},
+				},
+			})
 		end,
 	},
 
@@ -793,6 +807,8 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+			-- set compiler to clang due to some nastiness with the windows gcc compiler. See https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
+			require("nvim-treesitter.install").compilers = { "clang" }
 
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
