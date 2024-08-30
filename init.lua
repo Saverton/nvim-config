@@ -587,7 +587,9 @@ require("lazy").setup({
 			--    :Mason
 			--
 			--  You can press `g?` for help in this menu
-			require("mason").setup()
+			require("mason").setup({
+				log_level = vim.log.levels.DEBUG,
+			})
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
@@ -627,7 +629,7 @@ require("lazy").setup({
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		opts = {
-			notify_on_error = false,
+			notify_on_error = true,
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_fallback = true,
@@ -639,7 +641,7 @@ require("lazy").setup({
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
-				-- javascript = { { "prettierd", "prettier" } },
+				javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
 		},
 	},
