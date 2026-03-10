@@ -589,6 +589,10 @@ require("lazy").setup({
 			--  You can press `g?` for help in this menu
 			require("mason").setup({
 				log_level = vim.log.levels.DEBUG,
+				registries = {
+					"github:mason-org/mason-registry",
+					"github:Crashdummyy/mason-registry",
+				},
 			})
 
 			-- You can add other tools here that you want Mason to install
@@ -641,7 +645,6 @@ require("lazy").setup({
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
-				javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
 		},
 	},
